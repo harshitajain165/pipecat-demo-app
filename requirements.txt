@@ -1,0 +1,6 @@
+# Installs Pipecat directly from the open PR branch that adds Smallest AI services.
+# Once PR #4014 merges, this will be replaced with: pipecat-ai[smallest,daily,openai,silero]
+pipecat-ai[daily,openai,silero] @ git+https://github.com/pipecat-ai/pipecat.git@markbackman/smallest-settings-cleanup
+websockets>=12.0
+httpx>=0.27.0
+python-dotenv>=1.0.0
