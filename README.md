@@ -121,4 +121,3 @@ Open the URL in any browser — no app or account needed. The bot will greet you
 
 - The `sophia` voice is used by default. See [Smallest AI voices](https://smallest.ai) for alternatives.
 - The STT service is in active development as part of the Pipecat integration. For best results, use English (`language=en`) and speak clearly.
-- For questions or issues, open an issue in this repo or reach out on [Discord](https://discord.gg/Ub25S48hSf).
