@@ -1,3 +1,4 @@
+import argparse
 import asyncio
 import os
 import sys
@@ -53,13 +54,47 @@ async def create_daily_room() -> tuple[str, str]:
     return room["url"], token
 
 
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Smallest AI x Pipecat Voice Demo")
+    parser.add_argument(
+        "--voice",
+        default="sophia",
+        help="TTS voice ID to use (default: sophia)",
+    )
+    parser.add_argument(
+        "--language",
+        default="en",
+        help="Language code for both STT and TTS (default: en). Examples: hi, de, fr, es, ta",
+    )
+    parser.add_argument(
+        "--speed",
+        type=float,
+        default=None,
+        help="TTS speech speed multiplier, e.g. 0.8 for slower, 1.2 for faster (default: model default)",
+    )
+    parser.add_argument(
+        "--model",
+        default="lightning-v3.1",
+        choices=["lightning-v2", "lightning-v3.1"],
+        help="TTS model to use (default: lightning-v3.1)",
+    )
+    return parser.parse_args()
+
+
 async def main():
+    args = parse_args()
     room_url, token = await create_daily_room()
 
     print("\n" + "=" * 60)
     print("  Smallest AI x Pipecat — Voice Demo")
     print("=" * 60)
     print(f"\n  Join URL:\n\n    {room_url}\n")
+    print(f"  Voice    : {args.voice}")
+    print(f"  Language : {args.language}")
+    print(f"  Model    : {args.model}")
+    if args.speed is not None:
+        print(f"  Speed    : {args.speed}")
+    print()
     print("  Open the URL above in your browser to talk to the bot.")
     print("  The bot uses Smallest AI for both STT and TTS.")
     print("\n  Press Ctrl+C to stop.\n")
@@ -77,13 +112,18 @@ async def main():
 
     stt = SmallestSTTService(
         api_key=os.getenv("SMALLEST_API_KEY"),
-        settings=SmallestSTTService.Settings(language="en"),
+        settings=SmallestSTTService.Settings(language=args.language),
     )
 
     tts = SmallestTTSService(
         api_key=os.getenv("SMALLEST_API_KEY"),
         sample_rate=24000,
-        settings=SmallestTTSService.Settings(voice="sophia"),
+        settings=SmallestTTSService.Settings(
+            voice=args.voice,
+            language=args.language,
+            model=args.model,
+            speed=args.speed,
+        ),
     )
 
     llm = OpenAILLMService(

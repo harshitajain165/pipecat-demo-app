@@ -117,6 +117,52 @@ Open the URL in any browser — no app or account needed. The bot will greet you
 
 ---
 
+## Experimenting with voices and languages
+
+You can pass flags when starting the bot to change the voice, language, model, or speech speed — no code changes needed.
+
+```bash
+python bot.py --voice sophia --language en
+python bot.py --language hi                  # Hindi
+python bot.py --language de                  # German
+python bot.py --voice sophia --speed 1.2     # 20% faster
+python bot.py --model lightning-v2           # use older model
+```
+
+### Available flags
+
+| Flag | Default | Description |
+|------|---------|-------------|
+| `--voice` | `sophia` | TTS voice ID |
+| `--language` | `en` | Language code for both STT and TTS |
+| `--speed` | model default | Speech speed multiplier (e.g. `0.8` = slower, `1.2` = faster) |
+| `--model` | `lightning-v3.1` | TTS model — `lightning-v2` or `lightning-v3.1` |
+
+### Supported languages
+
+| Code | Language |
+|------|----------|
+| `en` | English |
+| `hi` | Hindi |
+| `de` | German |
+| `fr` | French |
+| `es` | Spanish |
+| `it` | Italian |
+| `pt` | Portuguese |
+| `ru` | Russian |
+| `ar` | Arabic |
+| `ta` | Tamil |
+| `te` | Telugu |
+| `bn` | Bengali |
+| `gu` | Gujarati |
+| `mr` | Marathi |
+| `nl` | Dutch |
+| `pl` | Polish |
+
+> STT and TTS use the same `--language` value. Not all languages are available for both — if a language works for STT but not TTS (or vice versa), the service will fall back to its default.
+
+---
+
 ## Notes
 
 - The `sophia` voice is used by default. See [Smallest AI voices](https://smallest.ai) for alternatives.
