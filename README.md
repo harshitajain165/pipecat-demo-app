@@ -135,29 +135,6 @@ python bot.py --voice sophia --language fr   # French with sophia voice
 | `--voice` | `sophia` | TTS voice ID |
 | `--language` | `en` | Language code for both STT and TTS |
 
-### Supported languages
-
-| Code | Language |
-|------|----------|
-| `en` | English |
-| `hi` | Hindi |
-| `de` | German |
-| `fr` | French |
-| `es` | Spanish |
-| `it` | Italian |
-| `pt` | Portuguese |
-| `ru` | Russian |
-| `ar` | Arabic |
-| `ta` | Tamil |
-| `te` | Telugu |
-| `bn` | Bengali |
-| `gu` | Gujarati |
-| `mr` | Marathi |
-| `nl` | Dutch |
-| `pl` | Polish |
-
-> STT and TTS use the same `--language` value. Not all languages are available for both — if a language works for STT but not TTS (or vice versa), the service will fall back to its default.
-
 ---
 
 ## Notes
