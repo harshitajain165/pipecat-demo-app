@@ -12,7 +12,7 @@ A fully interruptible real-time voice assistant running on [Pipecat](https://git
 
 ## Prerequisites
 
-- Python 3.10+
+- Python **3.10 or 3.11** (3.9 and below will not work — some dependencies require 3.10+)
 - A [Smallest AI](https://smallest.ai) API key
 - An [OpenAI](https://platform.openai.com) API key
 - A [Daily](https://dashboard.daily.co) API key (free tier works)
@@ -28,16 +28,35 @@ git clone https://github.com/harshitajain165/pipecat-demo-app.git
 cd pipecat-demo-app
 ```
 
-### 2. Create a virtual environment
+> **Important:** All subsequent commands must be run from inside the `pipecat-demo-app` directory. If you run them from a different folder, the `.env` file and `requirements.txt` won't be found.
+
+### 2. Check your Python version
 
 ```bash
-python3 -m venv venv
+python3 --version
+```
+
+If the output shows Python 3.9 or below, install a newer version first:
+
+```bash
+brew install python@3.11
+```
+
+### 3. Create a virtual environment
+
+Use `python3.11` (or `python3.10`) explicitly to ensure the correct version is used:
+
+```bash
+python3.11 -m venv venv
 source venv/bin/activate   # Windows: venv\Scripts\activate
 ```
 
-### 3. Install dependencies
+You can confirm the venv is active when you see `(venv)` at the start of your terminal prompt.
+
+### 4. Upgrade pip and install dependencies
 
 ```bash
+pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
@@ -45,7 +64,7 @@ pip install -r requirements.txt
 > Once [PR #4014](https://github.com/pipecat-ai/pipecat/pull/4014) merges, the install
 > will simplify to `pip install pipecat-ai[smallest,daily,openai,silero]`.
 
-### 4. Add your API keys
+### 5. Add your API keys
 
 ```bash
 cp .env.example .env
@@ -59,9 +78,18 @@ OPENAI_API_KEY=...
 DAILY_API_KEY=...
 ```
 
+**Where to find each key:**
+- **Smallest AI** — [https://smallest.ai](https://smallest.ai) → Dashboard → API Keys
+- **OpenAI** — [https://platform.openai.com/api-keys](https://platform.openai.com/api-keys)
+- **Daily** — [https://dashboard.daily.co/developers](https://dashboard.daily.co/developers) → copy the **API Key** field
+
+> **Note:** Do not commit your `.env` file or share your API keys publicly.
+
 ---
 
 ## Run
+
+Make sure your virtual environment is active (`(venv)` in your prompt) and you are inside the `pipecat-demo-app` directory, then run:
 
 ```bash
 python bot.py
